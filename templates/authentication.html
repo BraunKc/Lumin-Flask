@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/authentication.css') }}">
+{% endblock %}
+
+{% block body %}
+{{ RegisterForm.hidden_tag() }}
+{{ LoginForm.hidden_tag() }}
+    <div class="container">
+        <div class="login-container">
+            <form action="{{ url_for('login_page') }}" method="post">
+                {{ LoginForm.email }}
+                {{ LoginForm.psw }}
+                {{ LoginForm.submit }}
+            </form>
+
+        </div>
+        <div class="register-container">
+            <form action="{{ url_for('registration_page') }}" method="post">
+                {{ RegisterForm.email }}
+                {{ RegisterForm.username }}
+                {{ RegisterForm.psw }}
+                {{ RegisterForm.confirm_psw }}
+                {{ RegisterForm.submit }}
+            </form>
+        </div>
+        <div class="switch"></div>
+    </div>
+{% endblock %}
