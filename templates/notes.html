@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/notes.css') }}">
+{% endblock %}
+
+{% block body %}
+    <nav>
+        <button id="createBtn">create note</button>
+        <a href="{{ url_for('account_page') }}">account</a>
+        <a href="{{ url_for('logout') }}">logout</a>
+    </nav><br>
+    <div class="notes">
+        {% for note in own_notes %}
+            <div class="note" id="{{ note.id }}">
+                <a href="{{ url_for('note_page', note_id=note.id) }}">{{ note.title }}</a>
+                <a href="{{ url_for('delete_note', note_id=note.id) }}">delete</a>
+            </div>
+        {% endfor %}
+    </div><br>
+    {% block work_zone %}
+        <div class="work-zone">
+            <span>Open any note</span>
+        </div>
+    {% endblock %}
+    <script src="{{ url_for('static', filename='js/notes.js') }}"></script>
+    {% block js %}
+    {% endblock %}
+{% endblock %}

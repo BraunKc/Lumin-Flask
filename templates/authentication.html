@@ -10,18 +10,18 @@
     <div class="container">
         <div class="login-container">
             <form action="{{ url_for('login_page') }}" method="post">
-                {{ LoginForm.email }}
-                {{ LoginForm.psw }}
+                {{ LoginForm.email }}<br>
+                {{ LoginForm.psw }}<br>
                 {{ LoginForm.submit }}
             </form>
 
-        </div>
+        </div><br></br>
         <div class="register-container">
             <form action="{{ url_for('registration_page') }}" method="post">
-                {{ RegisterForm.email }}
-                {{ RegisterForm.username }}
-                {{ RegisterForm.psw }}
-                {{ RegisterForm.confirm_psw }}
+                {{ RegisterForm.email }}<br>
+                {{ RegisterForm.username }}<br>
+                {{ RegisterForm.psw }}<br>
+                {{ RegisterForm.confirm_psw }}<br>
                 {{ RegisterForm.submit }}
             </form>
         </div>

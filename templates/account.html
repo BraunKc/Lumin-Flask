@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/account.css') }}">
+{% endblock %}
+
+{% block body %}
+    <span>Email: </span><span id="email">{{ user.email }}</span><br>
+    <span>Username: </span><span id="username">{{ user.username }}</span><br>
+    <span>Password: </span><button id="password">change</button>
+    <script src="{{ url_for('static', filename='js/account.js') }}"></script><br>
+    <a href="{{ url_for('delete_account') }}">delete account</a>
+{% endblock %}

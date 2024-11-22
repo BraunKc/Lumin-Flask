@@ -1,0 +1,19 @@
+{% extends 'notes.html' %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/note.css') }}">
+    <script>
+        var noteId = {{ note.id }}
+    </script>
+{% endblock %}
+
+{% block work_zone %}
+    <div class="work-zone">
+        <input id="title" type="text" value="{{ note.title }}"><br>
+        <textarea id="content">{{ note.content }}</textarea>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script src="{{ url_for('static', filename='js/note.js') }}"></script>
+{% endblock %}
