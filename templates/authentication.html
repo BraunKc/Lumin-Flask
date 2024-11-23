@@ -9,22 +9,37 @@
 {{ LoginForm.hidden_tag() }}
     <div class="container">
         <div class="login-container">
-            <form action="{{ url_for('login_page') }}" method="post">
-                {{ LoginForm.email }}<br>
-                {{ LoginForm.psw }}<br>
-                {{ LoginForm.submit }}
-            </form>
-
-        </div><br></br>
-        <div class="register-container">
-            <form action="{{ url_for('registration_page') }}" method="post">
-                {{ RegisterForm.email }}<br>
-                {{ RegisterForm.username }}<br>
-                {{ RegisterForm.psw }}<br>
-                {{ RegisterForm.confirm_psw }}<br>
-                {{ RegisterForm.submit }}
-            </form>
+            <div class="login-form {{ action }}">
+                <span class="form-title">Login</span>
+                <form class="form" action="{{ url_for('login_page') }}" method="post">
+                    {{ LoginForm.email }}
+                    {{ LoginForm.psw }}
+                    {{ LoginForm.submit }}
+                </form>
+            </div>
         </div>
-        <div class="switch"></div>
+        <div class="register-container">
+            <div class="register-form {{ action }}">
+                <span class="form-title">Create Account</span>
+                <form class="form" action="{{ url_for('registration_page') }}" method="post">
+                    {{ RegisterForm.email }}
+                    {{ RegisterForm.username }}
+                    {{ RegisterForm.psw }}
+                    {{ RegisterForm.confirm_psw }}
+                    {{ RegisterForm.submit }}
+                </form>
+            </div>
+        </div>
+        <div class="switch-container {{ action }}" id="switchContainer">
+            <div class="sign-in-container {{ action }}">
+                <span class="switch-text">Already have an account?</span>
+                <button class="switch-btn" id="signInBtn">Sign In</button>
+            </div>
+            <div class="sign-up-container {{ action }}">
+                <span class="switch-text">Don`t have an account?</span>
+                <button class="switch-btn" id="signUpBtn">Sign Up</button>
+            </div>
+        </div>
     </div>
+    <script src="{{ url_for('static', filename='js/authentication.js') }}"></script>
 {% endblock %}

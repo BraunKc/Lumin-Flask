@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Montserrat, sans-serif;
+}
+
+::placeholder {
+    color: #666;
+}
+
+body {
+    height: 100vh;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #111;
+}
+
+.container {
+    height: 25vw;
+    width: 40vw;
+
+    display: flex;
+    position: relative;
+
+    background: #222;
+    border-radius: 3vw;
+}
+
+.login-container, .register-container {
+    height: 100%;
+    width: 50%;
+
+    overflow: hidden;
+}
+
+.login-form, .register-form {
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.form-title {
+    color: #fefaee;
+    font-size: 1.5vw;
+    font-weight: bold;
+}
+
+.form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1vw;
+}
+
+.form input {
+    width: 50%;
+    outline: none;
+    border: none;
+    padding: .5vw;
+    border-radius: .5vw;
+    background: #333;
+    font-size: .7vw;
+    color: #fefaee;
+}
+
+.form .submit-btn {
+    width: 30%;
+    cursor: pointer;
+    background: transparent;
+    border: 1px solid #fefaee;
+}
+
+.switch-container {
+    height: 100%;
+    width: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+
+    background: #333333;
+    overflow: hidden;
+}
+
+.sign-in-container, .sign-up-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2vw;
+    align-items: center;
+    position: absolute;
+}
+
+.switch-text {
+    color: #fefaee;
+    font-size: 1vw;
+    font-weight: bold;
+}
+
+.switch-btn {
+    padding: .5vw 1.5vw;
+    outline: none;
+    border: 1px solid #fefaee;
+    color: #fefaee;
+    font-size: .7vw;
+    font-weight: bold;
+    border-radius: .5vw;
+    background: transparent;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+/* ANIMATION */
+
+.switch-container, .login, .register, .sign-in-container, .sign-up-container {
+    transition: all .5s ease-in-out;
+}
+
+.switch-container.login {
+    transform: translateX(100%);
+    border-radius: 10vw 3vw 3vw 5vw;
+}
+
+.switch-container.register {
+    transform: translateX(0);
+    border-radius: 3vw 10vw 5vw 3vw;
+}
+
+.sign-in-container.register, .sign-up-container.login {
+    transform: translateX(0);
+}
+
+.sign-in-container.login {
+    transform: translateX(-300%);
+}
+
+.sign-up-container.register {
+    transform: translateX(300%);
+}
+
+.login-form.register {
+    transform: translateX(100%);
+}
+
+.register-form.register, .login-form.login {
+    transform: translateX(0);
+}
+
+.register-form.login {
+    transform: translateX(-100%);
+}
