@@ -10,7 +10,6 @@ from config import *
 from User import User
 from Note import Note
 
-
 # WTFORMS
 from login_form import *
 from registration_form import *
@@ -23,7 +22,11 @@ def load_user(user_id):
 def home_page():
     return render_template('home.html', title='Lumin')
 
-# ----- REGISTER --- LOGIN --- LOGOUT -----
+'''
+user db
+registration and authentication users
+register, login, logout
+'''
 
 @app.route('/registration', methods=['GET', 'POST'])
 def registration_page():
@@ -75,7 +78,12 @@ def logout():
     logout_user()
     return redirect(url_for('home_page'))
 
-# ----- NOTES -----
+'''
+note db
+add in db
+update db
+delete from db
+'''
 
 def encrypt_data(data: str) -> bytes:
     sha256_hash = hashlib.sha256(current_user.password.encode('utf-8')).digest()
@@ -84,7 +92,7 @@ def encrypt_data(data: str) -> bytes:
     encrypted_data = cipher_suite.encrypt(data.encode('utf-8'))
     return encrypted_data
 
-# return decrypt note
+# return decrypt content of note
 def decrypt_data(data) -> dict:
     sha256_hash = hashlib.sha256(current_user.password.encode('utf-8')).digest()
     key = base64.urlsafe_b64encode(sha256_hash)
@@ -100,14 +108,14 @@ def decrypt_data(data) -> dict:
     }
     return note
 
-# all notes
+# page with all notes
 @app.route('/notes')
 def notes_page():
     own_notes = Note.query.filter_by(user_id=current_user.id).order_by(Note.date).all()
 
     return render_template('notes.html', title='Lumin | Notes', own_notes=own_notes)
 
-# create note (no visual)
+# page for create note (no visual)
 @app.route('/notes/create', methods=['POST'])
 def create_note():
     if request.method == 'POST':
@@ -140,7 +148,7 @@ def note_page(note_id: int):
             print('Edit database error')
     return render_template('note.html', title=note.title, own_notes=own_notes, note=decrypt_data(note))
 
-# delete note (no visual)
+# page for delete note (no visual)
 @app.route('/notes/<int:note_id>/delete', methods=['GET', 'POST'])
 def delete_note(note_id: int):
     note = Note.query.get_or_404(note_id)
@@ -152,7 +160,11 @@ def delete_note(note_id: int):
         return 'Delete note error'
     return redirect(url_for('notes_page'))
 
-# ----- USER -----
+'''
+user db
+update db
+delete from db
+'''
 
 # account page (information about user), can edit password
 @app.route('/account', methods=['GET', 'POST'])
@@ -167,7 +179,7 @@ def account_page():
             return 'Update password error'
     return render_template('account.html', title=f'Account | {current_user.username}', user=current_user)
 
-# delete account (no visual)
+# page for delete account (no visual)
 @app.route('/account/delete', methods=['GET', 'POST'])
 def delete_account():
     try:
@@ -184,7 +196,6 @@ def delete_account():
             return 'User delete error'
     except:
         return 'Notes delete error'
-
 
 if __name__ == '__main__':
     app.run(debug=True)
