@@ -1,5 +1,5 @@
 from flask import render_template, redirect, url_for, request
-from flask_login import login_user, logout_user, current_user
+from flask_login import login_user, logout_user, current_user, login_required
 
 from werkzeug.security import generate_password_hash, check_password_hash
 from cryptography.fernet import Fernet
@@ -100,6 +100,7 @@ def login_page():
                            RegisterForm=RegisterForm(), LoginForm=LoginForm())
 
 @app.route('/logout')
+@login_required
 def logout():
     """
     User logout route.
@@ -155,6 +156,7 @@ def decrypt_data(data) -> dict:
 
 # Page with all notes
 @app.route('/notes')
+@login_required
 def notes_page():
     """
     Notes page route.
@@ -168,6 +170,7 @@ def notes_page():
 
 # Page for creating a note (no visual)
 @app.route('/notes/create', methods=['POST'])
+@login_required
 def create_note():
     """
     Create note route.
@@ -190,6 +193,7 @@ def create_note():
 
 # Note page, user can edit note
 @app.route('/notes/<int:note_id>', methods=['GET', 'POST'])
+@login_required
 def note_page(note_id: int):
     """
     Note page route.
@@ -214,6 +218,7 @@ def note_page(note_id: int):
 
 # Page for deleting a note (no visual)
 @app.route('/notes/<int:note_id>/delete', methods=['GET', 'POST'])
+@login_required
 def delete_note(note_id: int):
     """
     Delete note route.
@@ -239,6 +244,7 @@ Routes for updating and deleting user account
 
 # Account page (information about user), can edit password
 @app.route('/account', methods=['GET', 'POST'])
+@login_required
 def account_page():
     """
     Account page route.
@@ -258,6 +264,7 @@ def account_page():
 
 # Page for deleting account (no visual)
 @app.route('/account/delete', methods=['GET', 'POST'])
+@login_required
 def delete_account():
     """
     Delete account route.
